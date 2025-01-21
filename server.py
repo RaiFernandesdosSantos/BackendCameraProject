@@ -10,6 +10,11 @@ model = genai.GenerativeModel("gemini-1.5-flash")
 app = Flask(__name__)
 
 
+@app.route("/")
+def index():
+    return "Ta funcionando"
+
+
 @app.route("/catch", methods=["POST"])
 def catch_image():
     image = request.files["image"]
@@ -29,4 +34,4 @@ def catch_image():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=8080)
