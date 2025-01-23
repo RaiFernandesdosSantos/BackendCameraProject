@@ -26,14 +26,16 @@ def catch_image():
 
     image.save(image_path)
 
-    img = cv2.imread(image)
+    img = cv2.imread(image_path)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     _, thresh = cv2.threshold(gray, 102, 255, cv2.THRESH_BINARY_INV)
 
-    cv2.imwrite("imagem_processada.png", thresh)
+    processed_image_path = os.path.join("temp", "imagem_processada.png")
 
-    text = PIL.Image.open("imagem_processada.png")
+    cv2.imwrite(processed_image_path, thresh)
+
+    text = PIL.Image.open(processed_image_path)
     response = model.generate_content(
         ["O que está escrito? apenas transcreva o texto sem comentar nada", text]
     )
