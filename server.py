@@ -2,7 +2,6 @@ import cv2
 import PIL.Image
 import google.generativeai as genai
 from flask import Flask, request
-from flask.cors import CORS
 from werkzeug.utils import secure_filename
 import os
 
@@ -11,7 +10,6 @@ genai.configure(api_key=os.getenv("API_KEY"))
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 app = Flask(__name__)
-CORS(app)
 
 @app.route("/")
 def index():
